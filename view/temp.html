@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">-->
+  <title>nitro File Manager</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/index.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
+  <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+  <script src="semantic/semantic.min.js"></script>
+
+  <link href="uploadlib/uploadfile.css" rel="stylesheet">
+  <script src="uploadlib/jquery.uploadfile.min.js"></script>
+  <script type="text/javascript" src="js/three.js"></script>
+  <script type ="text/javascript" src="js/jquery.js"></script>
+  <script type ="text/javascript" src="js/index.js"></script>
+
+</head>
+<body>
+  <div class="ui inverted menu">
+    <a class="active item">
+      Home
+    </a>
+    <a class="item" onclick="location.href='https://github.com/parsgit/node-nitroFileManager'">
+      github
+    </a>
+  </div>
+
+  <div class="ui stackable grid">
+
+    <div class=" three wide column">
+        <div class="" style="padding-left: 10px;">
+            <div class="ui attached message message-header">
+                <div class="header">
+                    Title File
+                    <button id="modaltitle" class="btn"><i class="small material-icons" style="float: right; color:rgb(27, 161, 27); cursor: pointer; ">add</i></button>
+                    <button class="btn" onclick="refreshtitle()"><i class="small material-icons" style="float: right; color:rgb(27, 161, 27); cursor: pointer; ">refresh</i></button>
+                </div>
+            </div>
+            <div class="ui grid attached fluid segment ">
+                <div id="titleitem" class="sixteen wide column ">
+                
+                    <a href="#" class="w3-bar-item w3-button">title 1</a><br>
+                    <a href="#" class="w3-bar-item w3-button">title 2</a><br>
+                    <a href="#" class="w3-bar-item w3-button">title 3</a><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="seven wide column">
+      <div class="">
+        <div class="ui attached message message-header">
+          <div class="header">
+
+            <div class="ui grid">
+              <div class="eight wide column middle aligned">
+                File List & Routing
+              </div>
+
+              <div class="eight wide column right aligned">
+                    <div class="ui small basic icon buttons">
+                            <button id="modalfolder" class="ui button"><i class="plus green icon"></i></button>
+                    </div>
+                <!--<div class="ui small basic dropdown icon button">
+                  <i class="plus green icon" ></i>
+                    <button class="btn" onclick="functionname()" style="height: 6px; width: 3px"><i class="tiny material-icons" style="float: right;height: 6px; width: 3px ;color:rgb(27, 161, 27); cursor: pointer; ">add</i></button>
+                
+                    
+                  <div class="menu">
+
+                    <div data-value="1" class="item">
+                      Folder
+                    </div>
+                    <div class="item">
+                      File
+                    </div>
+
+                  </div>
+                </div>-->
+
+
+                <div class="ui small basic icon buttons">
+                  <button onclick="location.reload();" class="ui button"><i class="redo alternate green icon"></i></button>
+                  <!--<button class="btn" onclick="functionname()"><i class="small material-icons" style="float: right; color:rgb(27, 161, 27); cursor: pointer; ">refresh</i></button>
+                  -->
+                </div>
+
+
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="ui grid attached fluid segment back-list">
+
+
+          <div class="three wide column">
+            <div onclick="backPath();" class="ui blue button">
+              Back
+            </div>
+          </div>
+          <div class="ten wide column">
+            <div class="ui input" style="width: 100%;">
+              <input id="path" type="text" text="" placeholder="in to /home/{your_path}">
+            </div>
+          </div>
+          <div class="three wide column">
+            <div onclick="setPath();" class="ui blue button">
+              Set
+            </div>
+          </div>
+
+          <div id="dirList_box" class="sixteen wide column">
+
+            
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="five wide column">
+      <div class="" style="padding-right:4px;">
+
+        <div class="ui attached message message-header" >
+          <div class="header">
+
+            <div class="ui grid">
+              <div class="eight wide column middle aligned">
+                Node App Process
+              </div>
+
+              <div class="eight wide column right aligned">
+                <div class="ui small basic icon buttons">
+                  <button onclick="location.reload();" class="ui button"><i class="redo alternate green icon"></i></button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      <!--  <div class="ui grid attached fluid segment back-list">
+          <div class="ui top attached tabular menu">
+            <a class="active item back-list" data-tab="first">js File</a>
+            <a class="item back-list" data-tab="second">node App List</a>
+          </div>
+          <div id="js_file_box" class="ui bottom attached active tab segment back-list" style="padding: 17px;" data-tab="first">
+            <div id="div16-jabox" class="div16-jabox" >
+
+            </div>
+          </div>
+          <div id="node_app_box" class="ui bottom attached tab segment back-list" data-tab="second">
+          </div>
+
+        </div>  -->
+        <div class="ui grid attached fluid segment back-list">
+
+          <div id="tab_app" class="ui top attached tabular menu">
+            <a class="active item" data-tab="tab_1">js File</a>
+            <a class="item" data-tab="tab_2">node App List</a>
+          </div>
+          <div id="js_file_box" class="ui bottom attached active tab segment back-list" data-tab="tab_1">
+            <div id="div16-jabox" class="div16-jabox" >
+
+            </div>
+          </div>
+          <div id="node_app_box" class="ui bottom attached tab segment back-list" data-tab="tab_2">
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<!-- hide element -->
+<div style="display: none;">
+
+  <div id="dirList_box_item" class="ui grid middle aligned dirList-item">
+
+    <div class="ten wide column middle aligned">
+      <i class="fs20 orange folder icon"></i><b id="dirList_box_item_name"></b>
+    </div>
+    <div class="six wide column right aligned">
+      <div class="ui buttons">
+        <button name="" class="ui blue button buton_opendir"><i class="folder open icon"></i></button>
+        <div class="or"></div>
+        <button class="ui red button buton_delete"><i class="trash alternate icon"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="dirList_box_item_file" class="ui grid middle aligned dirList-item">
+    <div  class="ten wide column middle aligned">
+      <i class="file alternate icon fs20"></i> <b id="dirList_box_item_name" ></b>
+    </div>
+    <div class="six wide column right aligned">
+      <div class="ui buttons">
+        <button name="" class="ui blue button buton_download"><i class="download icon"></i></button>
+        <div class="or"></div>
+        <button class="ui red button buton_delete"><i class="trash alternate icon"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="js_file_item" class="ui grid js-file-style">
+    <div class="eleven wide column middle aligned">
+      <i class="fs20 green file code icon"></i>
+      <b id="js_file_item_name">appname.js</b>
+    </div>
+    <div class="five wide column right aligned">
+      <button class="circular ui icon button start_new_app_button">
+        <i class="icon green play"></i>
+      </button>
+    </div>
+  </div>
+
+
+  <div id="node_app_item" class="ui grid js-file-style">
+    <div class="eleven wide column middle aligned">
+        <b id="node_app_item_pm_id"></b>
+      <i class="fs20 microchip icon">
+      </i>
+
+      <b id="node_app_item_name">appname.js</b>
+    </div>
+
+    <div class="five wide column right aligned">
+        <button  id="node_app_log" class="ui compact icon button node_app_log">
+          log
+        </button>
+        <button id="node_app_action" class="ui compact icon button node_app_action">
+          <i  class="icon green play action_icon"></i>
+        </button>
+
+    </div>
+  </div>
+</div>
+
+<!-- modal -->
+    <div id="addtitle_modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                Add Title
+                <span id="title" class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                    <div class="ui form">
+                        <div class="field">
+                            <label>Title Name</label>
+                            <input id="maketitle_input" type="text"  placeholder="title"> 
+                        </div>
+                    
+                    </div>
+                    <br>
+                    <div class="actions">
+                        <div id="AddTitle" onclick="AddTitle()" class="ui approve green button">Add</div>
+                        <!--<div class="ui cancel orange button">Cancel</div>-->
+                    </div>
+            </div>
+            <!--<div class="modal-footer">
+                <hr>
+                <h3>Modal Footer</h3>
+            </div>-->
+        </div>
+    
+    </div>
+    <!--add folder-->
+    <div id="makeFolder_modal" class="modal">
+
+            <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                Make Folder
+                <span id="folder" class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="ui form">
+                    <div class="field">
+                        <label>name folder</label>
+                        <input id="makefolder_input" type="text"  placeholder="title"> 
+                    </div>
+                        
+                </div>
+                <br>
+                <div class="actions">
+                    <div onclick="makefolder()" class="ui approve green button">Add</div>
+                            <!--<div class="ui cancel orange button">Cancel</div>-->
+                </div>
+            </div>
+            <!--<div class="modal-footer">
+                <hr>
+                <h3>Modal Footer</h3>
+            </div>-->
+        </div>
+        
+    </div>
+    
+    <!--<div id="makefolder_modal" class="ui tiny modal">
+            <div class="header">Make a folder</div>
+            <div class="content">
+        
+              <div class="ui form">
+                <div class="field">
+                  <label>Folder Name</label>
+                  <input id="makefoldername_input" type="text"  placeholder="folder">
+                  
+                </div>
+        
+              </div>
+            </div>
+            <div class="actions">
+              <div onclick="makefolder()" class="ui approve green button">Make</div>
+              <div class="ui cancel orange button">Cancel</div>
+            </div>
+          </div>
+        -->
+<!--<div id="maketitle_modal" class="modal">
+  <div class="header">Add Title
+    <span class="close">&times;</span>
+  </div>
+  <div class="modal-content">
+
+    <div class="ui form">
+      <div class="field">
+        <label>Title Name</label>
+        <input id="maketitle_input" type="text"  placeholder="title">
+        
+      </div>
+
+    </div>
+  </div>
+  <div class="actions">
+    <div onclick="AddTitle()" class="ui approve green button">Add</div>-->
+    <!--<div class="ui cancel orange button">Cancel</div>-->
+  <!--</div>
+</div>-->
+
+<div id="log_modal" class="ui modal">
+  <div class="header">
+    <div class="ui grid">
+      <div class="eight wide column">
+        Logs
+      </div>
+      <div id="empty_log" class="eight wide column right aligned">
+        <button class="ui orange button">
+          Empty Log
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+
+    <div class="ui grid attached fluid segment">
+      <div id="tab_log" class="ui top attached tabular menu">
+        <a class="item active red" data-tab="second">Error</a>
+        <a class="item blue  " data-tab="first">Log</a>
+
+      </div>
+
+      <div  id="log_modal_error"  style="width: 100%;white-space:pre-wrap;background: #464444;color: #dedc6c;padding: 8px;overflow: auto;max-height: 450px;" class="ui bottom attached active tab segment" data-tab="second">
+
+      </div>
+      <div id="log_modal_log" class="ui bottom  tab segment " style="width: 100%;white-space:pre-wrap;background: #464444;color: #dedc6c;padding: 8px;overflow: auto;max-height: 450px;" data-tab="first">
+
+      </div>
+    </div>
+
+  </div>
+  <div class="actions">
+    <div class="ui cancel green button">Cancel</div>
+  </div>
+</div>
+
+
+  <div id="delete_modal" class="ui tiny modal">
+    <div class="header"></div>
+    <div class="actions">
+      <div  class="ui approve orange button">Approve</div>
+      <div class="ui cancel green button">Cancel</div>
+    </div>
+  </div>
+
+  <div id="startApp_modal" class="ui tiny modal">
+    <div class="header">Run App Option</div>
+    <div class="content">
+
+      <div class="ui form">
+        <div class="field">
+          <label>App Name</label>
+          <input id="runappname_input" type="text"  placeholder="myApp">
+        </div>
+        <!--<div class="field">
+          <label>Max Memory Restart</label>
+          <input type="text" placeholder="50M">
+        </div>-->
+
+      </div>
+    </div>
+    <div class="actions">
+      <div id="startappbutton" class="ui approve orange button">Start</div>
+      <div class="ui cancel green button">Cancel</div>
+    </div>
+  </div>
+
+  <div id="makefolder_modal" class="ui tiny modal">
+    <div class="header">Make a folder</div>
+    <div class="content">
+
+      <div class="ui form">
+        <div class="field">
+          <label>Folder Name</label>
+          <input id="makefoldername_input" type="text"  placeholder="folder">
+          
+        </div>
+
+      </div>
+    </div>
+    <div class="actions">
+      <div onclick="makefolder()" class="ui approve green button">Make</div>
+      <div class="ui cancel orange button">Cancel</div>
+    </div>
+  </div>
+
+  <div id="msg_modal" class="ui tiny modal">
+    <div class="header"></div>
+    <div class="actions">
+      <div class="ui cancel blue button">ok</div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    // Get the modal
+    var modaltitle = document.getElementById("addtitle_modal");
+    var modalfolder = document.getElementById("makeFolder_modal")
+
+    // Get the button that opens the modal
+    var btntitle = document.getElementById("modaltitle");
+    var btnfolder = document.getElementById("modalfolder");
+    
+
+    // Get the <span> element that closes the modal
+    var spantitle = document.getElementById("title");
+    var spanfolder = document.getElementById("folder");
+
+    // When the user clicks the button, open the modal 
+    btntitle.onclick = function() {
+      modaltitle.style.display = "block";
+    }
+    btnfolder.onclick = function() {
+      modalfolder.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    spantitle.onclick = function() {
+      modaltitle.style.display = "none";
+    }
+    spanfolder.onclick = function() {
+      modalfolder.style.display = "none";
+    }
+
+    
+  </script>
+    
+  
+</body>
+</html>

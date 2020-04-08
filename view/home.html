@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>nitro File Manager</title>
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <!--<link rel="stylesheet" href="css/style.css">-->
+        <link rel="stylesheet" href="css/vanilla-calendar.css">
+        <script src="js/vanilla-calendar.js"></script>
+    </head>
+    <body style="background-color: grey">
+        <!--top navarbar-->
+        <div class="topnav">
+            <a class="active" href="#home">Home</a>
+            <a href="#news">Inbox</a>
+            <div class="dropdown">
+                    <button class="dropbtn">Seting 
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                      <a href="#" id="one">Edit username</a>
+                      <a href="#" id="one">Edit password</a>
+                      <a href="#" id="one">Edit email</a>
+                    </div>
+            </div> 
+        </div>
+
+        <!--gride body-->
+        <div class="row">
+            <div class="col-2">
+                <div class="fild">
+                    <div class="fild-head">
+                        Title Name
+                        <button class="btnhead"><i class="fa fa-refresh"></i></button>
+
+                        <button id="modaltitle" class="btnhead"><i class="fa fa-plus"></i></button>
+                    </div>
+                    <div id="itemtitle" class="fild-body">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="fild">
+                    <div class="fild-head">
+                        Folder & File
+                        <button class="btnhead"><i class="fa fa-refresh"></i></button>
+
+                        <button id="modalfile" class="btnhead"><i class="fa fa-plus"></i></button>
+                    </div>
+                    <div id="bodyfild" class="fild-body">
+                        <button onclick="backfun()" class="buttonb">back</button>
+                        <textarea id="path" rows="1" cols="70" class="path"></textarea>
+                        <hr>
+                        <div id="father">
+                            <div id="folders" style="display: none;">
+                                <div class="filefild">
+                                    <button class="btnicon"><i class="fa fa-trash" style="font-size:15px;color: rgb(251, 252, 249)"></i></button>
+                                    <button onclick="func('PDF')" id="PDF" class="btnicon"><i class="fa fa-folder-open-o" style="font-size:17px;color: rgb(251, 252, 249)"></i></button>
+                                    <i class="material-icons folderIcon" style="font-size: 42px; color:rgb(23, 77, 117)">folder</i>
+                                    <p class="namefolder">PDF</p>
+                                </div>
+                                <div class="filefild">
+                                    <button class="btnicon"><i class="fa fa-trash" style="font-size:15px;color: rgb(251, 252, 249)"></i></button>
+                                    <button onclick="func('Word')" id="Word" class="btnicon"><i class="fa fa-folder-open-o" style="font-size:17px;color: rgb(251, 252, 249)"></i></button>
+                                    <i class="material-icons folderIcon" style="font-size: 42px; color:rgb(23, 77, 117)">folder</i>
+                                    <p class="namefolder">Word</p>
+                                </div>
+                                <div class="filefild">
+                                    <button class="btnicon"><i class="fa fa-trash" style="font-size:15px;color: rgb(251, 252, 249)"></i></button>
+                                    <button onclick="func('Excle')" id="Excle" class="btnicon"><i class="fa fa-folder-open-o" style="font-size:17px;color: rgb(251, 252, 249)"></i></button>
+                                    <i class="material-icons folderIcon" style="font-size: 42px; color:rgb(23, 77, 117)">folder</i>
+                                    <p class="namefolder">Excle</p>
+                                </div>
+                                <div class="filefild">
+                                    <button class="btnicon"><i class="fa fa-trash" style="font-size:15px;color: rgb(251, 252, 249)"></i></button>
+                                    <button onclick="func('Note')" id="Note" class="btnicon"><i class="fa fa-folder-open-o" style="font-size:17px;color: rgb(251, 252, 249)"></i></button>
+                                    <i class="material-icons folderIcon" style="font-size: 42px; color:rgb(23, 77, 117)">folder</i>
+                                    <p class="namefolder">Note</p>
+                                </div>
+                            </div>
+                            <div id="myfiles"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="fild">
+                    <div class="fild-head">
+                        Profile & Seting
+                    </div>
+                    <div class="fild-body">
+                        <div class=imgprof>
+                            <img src="image/006.jpg" alt="Paris" width="285" height="70">
+                        </div>
+                        <hr>
+                        <div id="myCalendar" class="vanilla-calendar" style="margin-bottom: 20px"></div>
+                    
+                        <lable style="font-family: 'Gill Sans';
+                        font-size: 15px;">Do you like have profile photo ?</lable><br>
+                        <div class="upload-btn-wrapper">
+                            <button class="btn">Upload a Photo</button>
+                            <input type="file" name="myfile" />
+                        </div>
+                        <br>
+                        <!--<lable style="font-family: 'Gill Sans';
+                        font-size: 15px;">Do you want edit profile ?</lable><br>
+                        <button onclick="update();" class="btn" style="margin-left: 125px; width: 140px;height: 40px;">Edit</button>
+                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--modal-->
+        <!--add title new-->
+        <div id="addtitle_modal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    Add Title
+                    <span id="title" class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="form">
+                        <form action="/newtitle" method="POST">
+                            <label for="titlename">Title Name</label><br>
+                            <input id="titlename" type="text" name="titlename" placeholder="title">
+                            <br>
+                            <input type="submit" value="Submit">
+                                
+                        </form>
+                            
+                    </div>
+                </div>
+            </div>   
+        </div>
+       <!--add file new-->
+       <div id="addfile_modal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    New File
+                    <span id="file" class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="form">
+                        
+                        <label for="filename">File Name</label><br>
+                        <input id="filename" type="text" name="titlename" placeholder="filename.pdf">
+                        <br>
+                        <lable for="description" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">Description</lable><br>
+                        <textarea id="desfile" name="desfile" placeholder="description"></textarea>
+                        <br>
+                        <button id="newfile" onclick="newfile();" type="submit">Submit</button>
+                            <!--<input id="newfile" type="submit" value="Submit">-->
+                            
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Modal update profile-->
+        <div id="updateone_modal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    Edit Profile
+                    <span id="upone" class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                        <div class="form">
+                        
+                                <label for="username">username</label><br>
+                                <input id="user" type="text" name="user" placeholder="username">
+                                <br>
+                                <button id="newusername" onclick="newusername();" type="submit">Submit</button>
+                                    <!--<input id="newfile" type="submit" value="Submit">-->
+                                    
+                                
+                                
+                        </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--script-->
+        <script type="text/javascript">
+            // Get the modal
+            var modaltitle = document.getElementById("addtitle_modal");
+        
+            // Get the button that opens the modal
+            var btntitle = document.getElementById("modaltitle");
+            
+            var spantitle = document.getElementById("title");
+        
+            // When the user clicks the button, open the modal 
+            btntitle.onclick = function() {
+              modaltitle.style.display = "block";
+            }
+            
+            // When the user clicks on <span> (x), close the modal
+            spantitle.onclick = function() {
+                modaltitle.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modaltitle.style.display = "none";
+                }
+            }
+            //modal add new folder
+            var modalfile = document.getElementById("addfile_modal");
+            var btnfile = document.getElementById("modalfile")
+            var spanfile = document.getElementById("file");
+            btnfile.onclick = function() {
+              modalfile.style.display = "block";
+            }
+            
+            // When the user clicks on <span> (x), close the modal
+            spanfile.onclick = function() {
+                modalfile.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modalfile.style.display = "none";
+                }
+            }
+
+            /*deleted file*/
+            function delfunc(id){
+                post = {
+                    idfile:id
+                }
+                $.post('/deletefile',post,function(fidback){
+                    if(fidback.ok){
+                        alert('Seccesfully deleted file.')
+                        window.location.replace('home.html');
+                    }
+                    else{
+                        alert('faild deleted file :(');
+                    }
+                })
+            }
+
+            /*update*/
+            /*$("#one").click(function(){
+                alert('click one!');
+                var modalupdate = document.getElementById("#updateone_modal");
+                var btnup = document.getElementById("#one")
+                var spanup = document.getElementById("#upone");
+                btnup.onclick = func2tion() {
+                    modalupdate.style.display = "block";
+                }
+                
+                // When the user clicks on <span> (x), close the modal
+                spanup.onclick = function() {
+                    modalupdate.style.display = "none";
+                }
+
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modalupdate.style.display = "none";
+                    }
+                }
+            })*/
+
+           /*set folder fild*/
+            function fun(id){
+                $("#myfiles").empty();
+                $("#folders").css("display", "block");
+                $("#path").empty();
+                document.getElementById("path").innerHTML = $("#"+id).text() + "/" ;
+                /*$("#path").append($("#'"++"").text()+"/");*/
+            }
+            /*button of back address*/
+            
+
+            /*set file fild*/
+            function func(type){
+                $("#folders").css("display", "none");
+                $("#path").append(type);
+                var myAddress = $("#path").text();
+                var arr = myAddress.split('/');
+                post={
+                    title:arr[0],
+                    typef:arr[1]
+                }
+                $.post("/showfiles" , post , function(fidback){
+                    console.log(fidback);
+                    /*alert(fidback.length);*/
+                    if(fidback.length){
+                        $("#myfiles").empty();
+                        for(var i=0; i < fidback.length ; i++){
+
+                            $("#myfiles").append(`<div class="filefild">
+                                <button onclick="delfunc(`+fidback[i].id+`);" class="btnicon"><i class="fa fa-trash" style="font-size:15px;color: rgb(251, 252, 249)"></i></button>
+                                <button onclick="function(`+fidback[i].id+`);" class="btnicon"><i class="fa fa-download" style="font-size:17px;color: rgb(251, 252, 249)"></i></button>
+                                <i class="material-icons folderIcon" style="font-size: 38px; color:rgb(23, 77, 117)">insert_drive_file</i>
+                                <p class="namefolder">`+fidback[i].name+`</p>
+                                </div>`);  
+                        };
+                    }
+                    else{
+                        $("#myfiles").empty();
+                    }
+                });
+                
+            }
+            function update(){
+                
+            }
+            
+
+            
+            /*show title list*/
+            var getTitle = function () {
+                $.post("/show" , {} , function (data){
+                    console.log(data);
+                    for(var i=0; i<data.length ; i++){
+                        $("#itemtitle").append(`<button onclick="fun(`+data[i].id+`)" id="`+data[i].id+`" class="alink">` + data[i].name +`</button><br>`);   
+                    };
+                    data.array.forEach(element => {console.log(element)});
+                    
+                });
+            } ;
+            getTitle() ;
+
+            /*new file*/
+            function newfile(){
+                console.log('click on newfile button');
+                var myAddress = $("#path").text();
+                var arr = myAddress.split('/');
+                var d=  new Date();
+                var y = d.getFullYear();
+                var m = d.getMonth();
+                var da = d.getUTCDay();
+                var h = d.getHours();
+                var mi = d.getMinutes();
+                var se = d.getSeconds();
+                var tf ;
+                switch(arr[1]){
+                    case 'PDF': tf = 'pdf'; break;
+                    case 'Word': tf = 'doc'; break;
+                    case 'Excle': tf = 'excle'; break;
+                    case 'Note' : tf = 'text' ; break;
+                }
+                var string = y+"-"+m+"-"+da+" "+h+":"+mi+':'+se; 
+                post={
+                    filename:$("#filename").val(),
+                    desfile:$("#desfile").val(),
+                    title:arr[0],
+                    type:arr[1],
+                    address:myAddress,
+                    date:string,
+                    filetype:tf
+                };
+
+                $.post( "/newfile",post)
+                .done(function(result) {
+                    console.log(result);
+                    if(result.ok){
+                    window.location.replace('home.html');
+                    }
+                    else{
+                    alert('name or type of file is incorrect');
+                    }
+                })
+                .fail(function() {
+                    alert( "There was a problem connecting to the Internet" );
+                })
+                .always(function() {
+                    
+                });
+            }
+                
+            
+            
+          </script>
+          <!--script of calender-->
+          <script>
+            let pastDates = true, availableDates = false, availableWeekDays = false
+            
+            let calendar = new VanillaCalendar({
+                selector: "#myCalendar",
+                months: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+                shortWeekday: ['Sun', 'Mon', 'Tue', 'Web', 'Thu', 'Fri', 'Sat'],
+                onSelect: (data, elem) => {
+                    console.log(data, elem)
+                }
+            })
+            
+            let btnPastDates = document.querySelector('[name=pastDates]')
+            btnPastDates.addEventListener('click', () => {
+                pastDates = !pastDates
+                calendar.set({pastDates: pastDates})
+                btnPastDates.innerText = `${(pastDates ? 'Disable' : 'Enable')} past dates`
+            })
+            
+            let btnAvailableDates = document.querySelector('[name=availableDates]')
+            btnAvailableDates.addEventListener('click', () => {
+                availableDates = !availableDates
+                btnAvailableDates.innerText = `${(availableDates ? 'Clear available dates' : 'Set available dates')}`
+                if (!availableDates) {
+                    calendar.set({availableDates: [], datesFilter: false})
+                    return
+                }
+                let dates = () => {
+                    let result = []
+                    for (let i = 1; i < 15; ++i) {
+                        if (i % 2) continue
+                        let date = new Date(new Date().getTime() + (60 * 60 * 24 * 1000) * i)
+                        result.push({date: `${String(date.getFullYear())}-${String(date.getMonth() + 1).padStart(2, 0)}-${String(date.getDate()).padStart(2, 0)}`})
+                    }
+                    return result
+                }
+                calendar.set({availableDates: dates(), availableWeekDays: [], datesFilter: true})
+            })
+            
+            let btnAvailableWeekDays = document.querySelector('[name=availableWeekDays]')
+            btnAvailableWeekDays.addEventListener('click', () => {
+                availableWeekDays = !availableWeekDays
+                btnAvailableWeekDays.innerText = `${(availableWeekDays ? 'Clear available weekdays' : 'Set available weekdays')}`
+                if (!availableWeekDays) {
+                    calendar.set({availableWeekDays: [], datesFilter: false})
+                    return
+                }
+                let days = [{
+                    day: 'monday'
+                }, {
+                    day: 'tuesday'
+                }, {
+                    day: 'wednesday'
+                }, {
+                    day: 'friday'
+                }]
+                calendar.set({availableWeekDays: days, availableDates: [], datesFilter: true})
+            })
+        </script>
+            
+    </body>
+</html>
+    

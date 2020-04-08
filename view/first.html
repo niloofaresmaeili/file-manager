@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>nitro File Manager</title>
+
+  <style>
+  .loginpanel{
+    background: rgba(194, 195, 195, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+  }
+  body{
+    background-image: url(image/1.jpg) !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+  }
+  .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+            }
+
+    a:link {
+      color: black;
+    }
+
+    /* visited link */
+    a:visited {
+      color: green;
+    }
+
+    /* mouse over link */
+    a:hover {
+      color: red;
+    }
+
+    /* selected link */
+    a:active {
+      color: yellow;
+    }
+  </style>
+
+  <link rel="stylesheet" type="text/css" href="css/semantic.min.css">
+  <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+  <script src="js/semantic.min.js"></script>
+
+</head>
+<body>
+  <div class="ui inverted menu">
+    <a class="active item">
+      Home
+    </a>
+
+  </div>
+
+
+  <div class="ui stackable grid centered">
+    <div class="five wide column">
+      <div class="loginpanel">
+        <h2 style="text-align:center; color: white;">Nitro File Manager</h2><hr>
+        <div class="ui form ">
+          <div class="field">
+            <label>Username</label>
+            <input id="username" type="text" name="username" placeholder="username">
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input id="password" type="password" name="password" placeholder="password">
+          </div>
+          <div class="clearfix">
+          <button onclick="loginUser();" class="ui blue button" type="submit">Login</button>
+          <a href="second.html">Create Account</a>
+          </div>
+        
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    function loginUser() {
+      console.log('run function');
+      post={
+        username:$("#username").val(),
+        password:$("#password").val()
+      };
+
+      $.post( "/l",post)
+      .done(function(result) {
+        console.log(result);
+        if(result.ok){
+          window.location.replace('home.html');
+        }
+        else{
+          alert('Password or username is incorrect');
+        }
+      })
+      .fail(function() {
+        alert( "There was a problem connecting to the Internet" );
+      })
+      .always(function() {
+
+      });
+    }
+
+  </script>
+</body>
+</html>
